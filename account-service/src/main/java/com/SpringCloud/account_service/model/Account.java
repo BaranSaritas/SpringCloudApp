@@ -10,12 +10,12 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(of="id")
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(value = "accounts")
-public class Account extends BaseModel  implements Serializable  {
+public class Account implements Serializable  {
     @PrimaryKey
     private String id = UUID.randomUUID().toString();
     @Column(value = "uname")

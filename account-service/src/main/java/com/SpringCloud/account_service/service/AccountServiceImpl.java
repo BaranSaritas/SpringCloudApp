@@ -5,6 +5,8 @@ import com.SpringCloud.account_service.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService{
@@ -27,6 +29,11 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public Object delete(String accountId) {
         return null;
+    }
+
+    @Override
+    public List<Account> getAllAccounts() {
+        return repository.findAll();
     }
 
 }

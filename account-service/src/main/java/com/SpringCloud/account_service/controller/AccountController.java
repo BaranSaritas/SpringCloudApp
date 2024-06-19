@@ -4,7 +4,6 @@ package com.SpringCloud.account_service.controller;
 import com.SpringCloud.account_service.model.Account;
 import com.SpringCloud.account_service.service.AccountService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,15 +21,18 @@ public class AccountController {
     public ResponseEntity<Account> getAccount(@RequestParam String accountId){
         return ResponseEntity.ok(accountService.getAccount(accountId));
     }
-
+    @GetMapping
+    public ResponseEntity getAllAccounts(){
+        return ResponseEntity.ok(accountService.getAllAccounts());
+    }
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account){
         return ResponseEntity.ok(accountService.createAccount(account));
     }
-@PutMapping
-    public ResponseEntity<Account> updateAccount(@RequestBody Account account){
-return ResponseEntity.ok(accountService.update(account));
-    }
+        @PutMapping
+            public ResponseEntity<Account> updateAccount(@RequestBody Account account){
+        return ResponseEntity.ok(accountService.update(account));
+            }
     @DeleteMapping
     public void deleteAccount(@RequestParam String accountId){
         accountService.delete(accountId);

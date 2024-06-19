@@ -3,11 +3,13 @@ package com.SpringCloud.account_service.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
+import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
-@EnableCassandraRepositories
 public class CassandraConfig extends AbstractCassandraConfiguration {
 
     @Value("${spring.data.cassandra.keyspace}")
@@ -19,11 +21,16 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     @Value("${spring.data.cassandra.contact-points}")
     private String contactPoints;
 
+    @Value("${spring.data.cassandra.username}")
+    private String username;
+    @Value("${spring.data.cassandra.password}")
+    private String password;
     @Override
     protected String getKeyspaceName() {
         return keyspaceName;
         // Cassandra anahtar alanı adınızı buraya girin
     }
+
 
     @Override
     protected String getContactPoints() {
@@ -39,6 +46,15 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     public SchemaAction getSchemaAction() {
         return SchemaAction.CREATE_IF_NOT_EXISTS;
     }
+
+    @Override
+    public CassandraClusterFactoryBean cluster(){
+        CassandraClusterFactoryBean cluster = super.cluster();
+        cluster.setUsername(username);
+        cluster.setPassword(password);
+        return cluster;
+    }
+
     // Opsiyonel olarak Cassandra kimlik doğrulama bilgilerini ekleyebilirsiniz
     // @Override
     // protected String getLocalDataCenter() {
