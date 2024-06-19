@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  data:
+    cassandra:
+      username: cassandra
+      password: cassandra
+      schema-action: =create_if_not_exists
+      keyspace: springcloud
+      port: 9042
+      contact-points: localhost
+  application:
+   name: account-service
+
