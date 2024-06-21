@@ -7,14 +7,17 @@ eureka:
       defaultZone: http://localhost:8070/eureka
 
 spring:
-  data:
-    cassandra:
-      username: cassandra
-      password: cassandra
-      schema-action: =create_if_not_exists
-      keyspace: springcloud
-      port: 9042
-      contact-points: localhost
   application:
    name: account-service
-
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true

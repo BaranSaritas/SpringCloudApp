@@ -1,7 +1,22 @@
 version: '3.8'
 services:
-  cassandra:
-    image: cassandra:latest
-    container_name: cassandra
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
     ports:
-      - "9042:9042"
+      - '3306:3306'
+
+  elasticsearch:
+    image: elasticsearch:8.8.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - validate_after_inactivity=0
+      - max_open_files=655360
+      - max_content_length_in_bytes=100000000
+      - transport.host=elasticsearch
+      - xpack.security.enabled=false
