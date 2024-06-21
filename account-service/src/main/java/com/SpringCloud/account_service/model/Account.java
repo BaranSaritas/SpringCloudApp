@@ -1,37 +1,36 @@
 package com.SpringCloud.account_service.model;
 
 import lombok.*;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-
-import java.io.Serializable;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.Date;
-import java.util.UUID;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of="id")
 @ToString
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(value = "accounts")
-public class Account   {
-    @PrimaryKey
-    private String id = UUID.randomUUID().toString();
-    @Column(value = "uname")
+public class Account extends BaseModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id ;
+    @Column(name = "uname")
     private String username;
-    @Column(value = "name")
+    @Column(name = "name")
     private String name;
-    @Column(value = "surname")
+    @Column(name = "surname")
     private String surname;
-    @Column(value = "birth_date")
+    @Column(name = "birth_date")
     private Date dateofBirthDate;
-    @Column(value = "passwd")
+    @Column(name = "passwd")
     private String password;
-    @Column(value = "email")
+    @Column(name = "email")
     private String email;
-    @Column(value = "is_active")
+    @Column(name = "is_active")
     private boolean active;
 
 }

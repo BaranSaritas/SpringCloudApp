@@ -1,11 +1,8 @@
 package com.SpringCloud.account_service.dto.request;
 
 import lombok.*;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Getter
 @Setter

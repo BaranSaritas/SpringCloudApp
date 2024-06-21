@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.cassandra.core.mapping.Column;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public abstract class BaseModel {
 
-    @Column("created_at")
+    @Column(name="created_at")
     private LocalDateTime createdAt;
-    @Column("updated_at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public void prePersist() {

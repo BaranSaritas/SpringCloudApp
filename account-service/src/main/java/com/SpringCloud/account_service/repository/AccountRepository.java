@@ -1,7 +1,6 @@
 package com.SpringCloud.account_service.repository;
 
 import com.SpringCloud.account_service.model.Account;
-import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
