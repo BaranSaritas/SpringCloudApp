@@ -9,7 +9,7 @@ services:
       - '3306:3306'
 
   elasticsearch:
-    image: elasticsearch:8.8.0
+    image: elasticsearch:6.8.5
     ports:
       - "9200:9200"
       - "9300:9300"
