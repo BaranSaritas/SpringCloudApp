@@ -9,7 +9,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountRequest {
-    private String id;
+    private Long id;
     private String username;
     private String name;
     private String surname;

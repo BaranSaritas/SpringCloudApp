@@ -1,10 +1,13 @@
 package com.SpringCloud.account_service.controller;
 
 
+import com.SpringCloud.account_service.dto.request.AccountRequest;
 import com.SpringCloud.account_service.model.Account;
 import com.SpringCloud.account_service.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -18,23 +21,25 @@ public class AccountController {
     }
 
     @GetMapping("/{accountId}")
-    public ResponseEntity<Account> getAccount(@RequestParam String accountId){
+    public ResponseEntity<AccountRequest> getAccount(@RequestParam Long accountId){
         return ResponseEntity.ok(accountService.getAccount(accountId));
     }
     @GetMapping
-    public ResponseEntity getAllAccounts(){
+    public ResponseEntity<List<AccountRequest>> getAllAccounts(){
         return ResponseEntity.ok(accountService.getAllAccounts());
     }
     @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody Account account){
+    public ResponseEntity<AccountRequest> createAccount(@RequestBody AccountRequest account){
         return ResponseEntity.ok(accountService.createAccount(account));
     }
-        @PutMapping
-            public ResponseEntity<Account> updateAccount(@RequestBody Account account){
-        return ResponseEntity.ok(accountService.update(account));
-            }
-    @DeleteMapping
-    public void deleteAccount(@RequestParam String accountId){
+
+    @PutMapping("/{accountId}")
+        public ResponseEntity<AccountRequest> updateAccount(@RequestBody AccountRequest account,@PathVariable Long accountId){
+        return ResponseEntity.ok(accountService.update(account,accountId));
+    }
+
+    @DeleteMapping("/{accountId}")
+    public void deleteAccount(@PathVariable Long accountId){
         accountService.delete(accountId);
     }
 

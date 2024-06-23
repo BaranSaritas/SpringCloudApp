@@ -1,17 +1,17 @@
 package com.SpringCloud.account_service.service;
 
-import com.SpringCloud.account_service.model.Account;
+import com.SpringCloud.account_service.dto.request.AccountRequest;
 
 import java.util.List;
 
 public interface AccountService {
-    Account getAccount(String accountId);
+    AccountRequest getAccount(Long accountId);
 
-    Account createAccount(Account account);
+    AccountRequest createAccount(AccountRequest account);
 
-    Account update(Account account);
+    AccountRequest update(AccountRequest account,Long accountId);
 
-    Object delete(String accountId);
+    void delete(Long accountId);
 
-     List<Account> getAllAccounts();
+     List<AccountRequest> getAllAccounts();
 }

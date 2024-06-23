@@ -1,5 +1,7 @@
 package com.SpringCloud.account_service.service;
 
+import com.SpringCloud.account_service.dto.request.AccountRequest;
+import com.SpringCloud.account_service.mapper.AccountMapper;
 import com.SpringCloud.account_service.model.Account;
 import com.SpringCloud.account_service.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,29 +13,41 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService{
     private final AccountRepository repository;
+    private final AccountMapper mapper;
     @Override
-    public Account getAccount(String accountId) {
-        return repository.findById(accountId).orElseThrow(IllegalArgumentException::new);
+    public AccountRequest getAccount(Long accountId) {
+        Account account= repository.findById(accountId).orElseThrow(IllegalArgumentException::new);
+
+        return mapper.AccountToAccountRequest(account);
     }
 
     @Override
-    public Account createAccount(Account account) {
-        return null;
+    public AccountRequest createAccount(AccountRequest _account) {
+        Account account = mapper.AccountRequestToAccount(_account);
+        account = repository.save(account);
+        _account.setId(account.getId());
+        return _account;
     }
 
     @Override
-    public Account update(Account account) {
-        return null;
+    public AccountRequest update(AccountRequest _account,Long accountId) {
+        Account account = repository.findById(accountId).orElseThrow(IllegalArgumentException::new);
+        mapper.updateAccountFromAccountRequest(_account,account);
+        repository.save(account);
+        _account.setId(account.getId());
+        return _account;
     }
 
     @Override
-    public Object delete(String accountId) {
-        return null;
+    public void delete(Long accountId) {
+        Account account = repository.findById(accountId).orElseThrow(IllegalArgumentException::new);
+        repository.delete(account);
     }
 
     @Override
-    public List<Account> getAllAccounts() {
-        return repository.findAll();
+    public List<AccountRequest> getAllAccounts() {
+        List<Account> accounts= repository.findAll();
+        return mapper.accountsToAccountRequests(accounts);
     }
 
 }
