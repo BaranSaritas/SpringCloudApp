@@ -1,7 +1,6 @@
 package com.SpringCloud.account_service.service;
 
-import com.SpringCloud.account_service.dto.request.AccountRequest;
-
+import org.example.client.dto.AccountRequest;
 import java.util.List;
 
 public interface AccountService {

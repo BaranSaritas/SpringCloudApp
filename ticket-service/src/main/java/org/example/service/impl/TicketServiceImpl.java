@@ -1,6 +1,8 @@
 package org.example.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.client.AccountServiceClient;
+import org.example.client.dto.AccountRequest;
 import org.example.dto.TicketDto;
 import org.example.model.PriorityType;
 import org.example.model.Ticket;
@@ -12,6 +14,7 @@ import org.example.service.TicketService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +24,7 @@ public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
     private final TicketElasticRepository elasticRepository;
     private final ModelMapper mapper;
-
+    private final AccountServiceClient accountServiceClient;
     @Override
     @Transactional
     public TicketDto save(TicketDto ticketDto) {
@@ -30,12 +33,15 @@ public class TicketServiceImpl implements TicketService {
             throw new IllegalArgumentException("Description bos olamaz");
 
         Ticket ticket = new Ticket();
+        ResponseEntity<AccountRequest> accountRequest = accountServiceClient.getAccount(Long.valueOf(ticketDto.getAssignee()));
+
+
         ticket.setDescription(ticketDto.getDescription());
         ticket.setNotes(ticketDto.getNotes());
         ticket.setTicketDate(ticketDto.getTicketDate());
         ticket.setTicketStatus(TicketStatus.valueOf(ticketDto.getTicketStatus()));
         ticket.setPriorityType(PriorityType.valueOf(ticketDto.getPriorityType()));
-        //ticket.setAssignee();
+        ticket.setAssignee(accountRequest.getBody().getName()+" " + accountRequest.getBody().getSurname());
 
         // mysql kaydet
         ticket = ticketRepository.save(ticket);

@@ -1,6 +1,6 @@
 package com.SpringCloud.account_service.mapper;
 
-import com.SpringCloud.account_service.dto.request.AccountRequest;
+import org.example.client.dto.AccountRequest;
 import com.SpringCloud.account_service.model.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

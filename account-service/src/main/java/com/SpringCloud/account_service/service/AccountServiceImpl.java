@@ -1,6 +1,6 @@
 package com.SpringCloud.account_service.service;
 
-import com.SpringCloud.account_service.dto.request.AccountRequest;
+import org.example.client.dto.AccountRequest;
 import com.SpringCloud.account_service.mapper.AccountMapper;
 import com.SpringCloud.account_service.model.Account;
 import com.SpringCloud.account_service.repository.AccountRepository;
@@ -14,6 +14,8 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService{
     private final AccountRepository repository;
     private final AccountMapper mapper;
+
+
     @Override
     public AccountRequest getAccount(Long accountId) {
         Account account= repository.findById(accountId).orElseThrow(IllegalArgumentException::new);

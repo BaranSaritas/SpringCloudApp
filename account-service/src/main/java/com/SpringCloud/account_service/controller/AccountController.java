@@ -1,9 +1,8 @@
 package com.SpringCloud.account_service.controller;
 
 
-import com.SpringCloud.account_service.dto.request.AccountRequest;
-import com.SpringCloud.account_service.model.Account;
 import com.SpringCloud.account_service.service.AccountService;
+import org.example.client.dto.AccountRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
